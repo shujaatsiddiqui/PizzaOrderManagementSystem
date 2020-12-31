@@ -1,0 +1,93 @@
+﻿@model IEnumerable<PizzaOrderManagementSystem.PizzaOrders_tb>
+
+@{
+    ViewBag.Title = "Pizza Orders";
+}
+
+    <h2>Pizza Orders</h2>
+
+<p>
+    @Html.ActionLink("Create Order", "Create")
+</p>
+<p>
+
+    @using (Html.BeginForm("Index", "PizzaManagment", FormMethod.Get))
+    {
+        <table class="table">
+            <tr>
+                <td>
+                    Search Option:
+                </td>
+                <td>
+                    @Html.DropDownList("DeliveryStatus", new List<SelectListItem>()
+                 { new SelectListItem() {Text="Pending",Value="Pending", Selected=true },
+                   new SelectListItem() {Text="Delivered",Value="Delivered" }
+                 }, new { htmlAttributes = new { @class = "form-control" } })
+                </td>
+                <td>
+                    <input type="submit" name="submit" value="Search" />
+                </td>
+            </tr>
+        </table>
+    }
+
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Name Of Customer")
+        </th>
+        <th>
+            @Html.DisplayName("Flavour Of Pizza")
+        </th>
+        <th>
+            @Html.DisplayName("Size Of The Pizza")
+        </th>
+        <th>
+            @Html.DisplayName("Billed Amount")
+        </th>
+        <th>
+            @Html.DisplayName("Address")
+        </th>
+        <th>
+            @Html.DisplayName("Delivery Status")
+        </th>
+        <th>
+            @Html.DisplayName("Type Of Payment")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NameOfCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlavourOfPizza)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SizeOfThePizza)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BilledAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DeliveryStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TypeOfPayment)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.OrderId })
+                @*@Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.OrderId })*@
+            </td>
+        </tr>
+    }
+
+</table>
